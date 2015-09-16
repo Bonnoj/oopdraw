@@ -26,14 +26,7 @@ public class RectComposer implements ShapeComposer {
 
 	@Override
 	public void complete(int x, int y) {
-		Point drawto = new Point(Math.max(x, startpos.x), Math.max(y, startpos.y));
-		Point newstart = new Point(Math.min(x, startpos.x), Math.min(y, startpos.y));
-		int nwidth1 = Math.abs((drawto.x - newstart.x));
-		int nheight1 = Math.abs((drawto.y - newstart.y));
-		rect.setWidth(nwidth1);
-		rect.setHeight(nheight1);
-		rect.setStart(newstart);
-		
+		expand(x, y);		
 	}
 
 }
