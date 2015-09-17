@@ -7,7 +7,7 @@ public class RectComposer implements ShapeComposer {
 	
 	@Override
 	public AbstractShape create(int x, int y) {
-		rect = new MyRect(); // Create the shape - Oval
+		rect = new MyRect(); // Create the shape - Rectangle
 		startpos = new Point(x,y);
 		rect.setStart(startpos);// Set the start position where mouse went down
 		return rect;
@@ -28,5 +28,4 @@ public class RectComposer implements ShapeComposer {
 	public void complete(int x, int y) {
 		expand(x, y);		
 	}
-
 }

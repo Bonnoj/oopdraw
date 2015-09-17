@@ -1,51 +1,48 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.geom.Ellipse2D;
 
 /**
  *  Class MyOval for drawing ovals is derived
- *  from our 'base class' AbstratShape
+ *  from our 'base class' AbstractShape
  */
-class MyOval extends AbstractShape {
+public class MyOval implements AbstractShape {
 
+	Ellipse2D.Double oval;
+	
+	// Constructor
+	public MyOval()
+	{
+		oval = new Ellipse2D.Double();
+	}
+	
+	@Override
+	// Sets start position
 	public void setStart(Point pt) {
-		ptStart = pt;
+		oval.x = pt.x;
+		oval.y = pt.y;
 	}
 
+	@Override
 	public void setEnd(Point pt) {
-		ptEnd = pt;
+		// unimplemented
 	}
 
-	public void setWidth(int w) {
-		nwidth = w;
-	}
-
-	public void setHeight(int h) {
-		nheight = h;
-	}
-
-	public Point getStart() {
-		return ptStart;
-	}
-
-	public Point getEnd() {
-		return new Point(0, 0);
-	}
-
-	public int getWidth() {
-		return nwidth;
-	}
-
-	public int getHeight() {
-		return nheight;
-	}
-
-	// Drawing routine
+	@Override
+	// Draw shape with default color
 	public void Draw(Graphics2D g) {
-		g.setColor(Color.green.darker()); // Set default color
-		g.drawOval(ptStart.x, ptStart.y, nwidth, nheight);
+		g.setColor(Color.green.darker()); // Set default color -you may ignore colors
+		g.draw(oval);
 	}
 
-}
+	// Sets the width
+	public void setWidth(int w) {
+		oval.width = w;
+	}
 
-// Class cOval ends
+	// Sets the height
+	public void setHeight(int h) {
+		oval.height = h;
+	}
+}
