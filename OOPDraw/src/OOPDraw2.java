@@ -34,10 +34,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.JFrame;
 
 import composers.ComposerFactory;
+import composers.ComposerFactory.ComposerType;
 import composers.ShapeComposer;
 import shapes.AbstractShape;
 
@@ -79,7 +81,7 @@ public class OOPDraw2 extends JFrame implements MouseListener, MouseMotionListen
 
 	private static final long serialVersionUID = 4695753453561082104L;
 
-	private Button btnLine, btnOval, btnRect, btnClear, btnComp, btnSmile;
+	private Button btnClear;
 
 	//ArrayList for storing the shapes
 	private ArrayList<AbstractShape> shapeList = new ArrayList<AbstractShape>();
@@ -96,7 +98,6 @@ public class OOPDraw2 extends JFrame implements MouseListener, MouseMotionListen
 	public OOPDraw2() {
 		// Do nothing in constructor off applet
 		initGUI();
-		currentComposer = ComposerFactory.getInstance().createLineComposer();
 	}
 
 	@Override
@@ -199,49 +200,21 @@ public class OOPDraw2 extends JFrame implements MouseListener, MouseMotionListen
 		setLayout(new FlowLayout());
 		this.addMouseListener(this);
 		this.addMouseMotionListener(this);
+		
 		// Create and Add the buttons
-		btnLine = new Button("Line");
-		btnLine.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				currentComposer = ComposerFactory.getInstance().createLineComposer();
-			}
-		});
-		btnOval = new Button("Oval");
-		btnOval.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				currentComposer = ComposerFactory.getInstance().createOvalComposer();
-			}
-		});
-		btnRect = new Button("Rectangle");
-		btnRect.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				currentComposer = ComposerFactory.getInstance().createRectComposer();
-			}
-		});
-		btnComp = new Button("Composite");
-		btnComp.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				currentComposer = ComposerFactory.getInstance().createFunnyShapeComposer();
-			}
-		});
+		final ComposerFactory factory = ComposerFactory.getInstance();
 		
-		btnSmile = new Button("Smiley");
-		btnSmile.addActionListener(new ActionListener() {
+		for (final Map.Entry<ComposerType, String> entry : factory.listComposerNames().entrySet()){
+			Button button = new Button(entry.getValue());
+			button.addActionListener(new ActionListener(){
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					currentComposer = factory.createComposer(entry.getKey());
+				}
+			});
+			add(button);
+		}
 
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				currentComposer = ComposerFactory.getInstance().createSmileyComposer();
-			}
-		});
-		
 		btnClear = new Button("Clear");
 		btnClear.addActionListener(new ActionListener() {
 
@@ -254,12 +227,6 @@ public class OOPDraw2 extends JFrame implements MouseListener, MouseMotionListen
 				repaint();
 			}
 		});
-		add(btnLine);
-		add(btnOval);
-		add(btnRect);
-		add(btnComp);
-		add(btnSmile);
 		add(btnClear);
 	}
-
-} // ALL ends :)
+}
