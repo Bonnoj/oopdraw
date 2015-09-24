@@ -1,4 +1,11 @@
+package composers;
 import java.awt.Point;
+
+import shapes.AbstractShape;
+import shapes.ComposedShape;
+import shapes.MyLine;
+import shapes.MyOval;
+import shapes.MyRect;
 
 public class FunnyShapeComposer implements ShapeComposer{
 

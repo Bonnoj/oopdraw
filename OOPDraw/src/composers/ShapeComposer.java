@@ -1,3 +1,5 @@
+package composers;
+import shapes.AbstractShape;
 
 public interface ShapeComposer {
 	

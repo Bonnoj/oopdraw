@@ -37,6 +37,10 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import composers.ComposerFactory;
+import composers.ShapeComposer;
+import shapes.AbstractShape;
+
 /**
  * Filename: OOPDraw2.java<br/>
  * Written By: Sunit Katkar<br/>
@@ -75,7 +79,7 @@ public class OOPDraw2 extends JFrame implements MouseListener, MouseMotionListen
 
 	private static final long serialVersionUID = 4695753453561082104L;
 
-	private Button btnLine, btnOval, btnRect, btnClear, btnComp;
+	private Button btnLine, btnOval, btnRect, btnClear, btnComp, btnSmile;
 
 	//ArrayList for storing the shapes
 	private ArrayList<AbstractShape> shapeList = new ArrayList<AbstractShape>();
@@ -229,6 +233,15 @@ public class OOPDraw2 extends JFrame implements MouseListener, MouseMotionListen
 			}
 		});
 		
+		btnSmile = new Button("Smiley");
+		btnSmile.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				currentComposer = ComposerFactory.getInstance().createSmileyComposer();
+			}
+		});
+		
 		btnClear = new Button("Clear");
 		btnClear.addActionListener(new ActionListener() {
 
@@ -245,6 +258,7 @@ public class OOPDraw2 extends JFrame implements MouseListener, MouseMotionListen
 		add(btnOval);
 		add(btnRect);
 		add(btnComp);
+		add(btnSmile);
 		add(btnClear);
 	}
 

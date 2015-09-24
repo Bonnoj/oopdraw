@@ -1,4 +1,8 @@
+package composers;
 import java.awt.Point;
+
+import shapes.AbstractShape;
+import shapes.MyRect;
 
 public class RectComposer implements ShapeComposer {
 

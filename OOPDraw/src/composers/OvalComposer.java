@@ -1,4 +1,8 @@
+package composers;
 import java.awt.Point;
+
+import shapes.AbstractShape;
+import shapes.MyOval;
 
 public class OvalComposer implements ShapeComposer{
 

@@ -1,3 +1,5 @@
+package shapes;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -6,7 +8,7 @@ import java.awt.geom.Rectangle2D;
 // Class MyRect for drawing Rectangle is derived
 // from our 'base class' AbstractShape
 
-class MyRect implements AbstractShape {
+public class MyRect implements AbstractShape {
 
 	Rectangle2D.Double rect;
 	Point startpos;

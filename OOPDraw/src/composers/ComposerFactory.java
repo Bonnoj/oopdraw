@@ -1,4 +1,4 @@
-
+package composers;
 public class ComposerFactory {
 
 	// Create an object of ComposerFactory
@@ -34,5 +34,11 @@ public class ComposerFactory {
 	public ShapeComposer createFunnyShapeComposer()
 	{
 		return new FunnyShapeComposer();
+	}
+	
+	// Returns new CompositeComposer
+	public ShapeComposer createSmileyComposer()
+	{
+		return new SmileyComposer();
 	}
 }
