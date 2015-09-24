@@ -10,11 +10,13 @@ import java.awt.geom.Ellipse2D;
 public class MyOval implements AbstractShape {
 
 	Ellipse2D.Double oval;
+	Point startpos;
 	
 	// Constructor
-	public MyOval()
+	public MyOval(Point startpos)
 	{
 		oval = new Ellipse2D.Double();
+		this.startpos = startpos;
 	}
 	
 	@Override
@@ -26,7 +28,16 @@ public class MyOval implements AbstractShape {
 
 	@Override
 	public void setEnd(Point pt) {
-		// unimplemented
+		int x = pt.x;
+		int y = pt.y;
+		
+		Point drawto = new Point(Math.max(x, startpos.x), Math.max(y, startpos.y));
+		Point newstart = new Point(Math.min(x, startpos.x), Math.min(y, startpos.y));
+		int nwidth1 = Math.abs((drawto.x - newstart.x));
+		int nheight1 = Math.abs((drawto.y - newstart.y));
+		setStart(newstart);
+		oval.width = nwidth1;
+		oval.height = nheight1;
 	}
 
 	@Override
@@ -34,15 +45,5 @@ public class MyOval implements AbstractShape {
 	public void Draw(Graphics2D g) {
 		g.setColor(Color.green.darker()); // Set default color -you may ignore colors
 		g.draw(oval);
-	}
-
-	// Sets the width
-	public void setWidth(int w) {
-		oval.width = w;
-	}
-
-	// Sets the height
-	public void setHeight(int h) {
-		oval.height = h;
 	}
 }

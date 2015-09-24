@@ -9,11 +9,13 @@ import java.awt.geom.Rectangle2D;
 class MyRect implements AbstractShape {
 
 	Rectangle2D.Double rect;
+	Point startpos;
 	
 	// Constructor
-	public MyRect()
+	public MyRect(Point startpos)
 	{
 		rect = new Rectangle2D.Double();
+		this.startpos = startpos;
 	}
 	
 	
@@ -26,7 +28,16 @@ class MyRect implements AbstractShape {
 
 	@Override
 	public void setEnd(Point pt) {
-		// unimplemented
+		int x = pt.x;
+		int y = pt.y;
+		
+		Point drawto = new Point(Math.max(x, startpos.x), Math.max(y, startpos.y));
+		Point newstart = new Point(Math.min(x, startpos.x), Math.min(y, startpos.y));
+		int nwidth1 = Math.abs((drawto.x - newstart.x));
+		int nheight1 = Math.abs((drawto.y - newstart.y));
+		setStart(newstart);
+		rect.width = nwidth1;
+		rect.height = nheight1;
 	}
 
 	@Override
@@ -35,16 +46,4 @@ class MyRect implements AbstractShape {
 		g.setColor(Color.blue.brighter()); // Set default color
 		g.draw(rect);
 	}
-
-	// Sets the width
-	public void setWidth(int w) {
-		rect.width = w;
-	}
-
-	// Sets the height
-	public void setHeight(int h) {
-		rect.height = h;
-	}
 }
-
-// Class cRect ends
